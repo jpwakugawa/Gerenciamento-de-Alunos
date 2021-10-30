@@ -61,20 +61,9 @@ void cadastrarAluno()
         printf("Erro na abertura do arquivo");
     else
     {
-        printf("Nome: "); scanf("%s", aluno.nome);
-        while((getchar()) != '\n');
-        printf("RA: "); scanf("%d", &aluno.RA);
-        while((getchar()) != '\n');
-        printf("P1: "); scanf("%lf", &aluno.P1);
-        while((getchar()) != '\n');
-        printf("P2: "); scanf("%lf", &aluno.P2);
-        while((getchar()) != '\n');
-        printf("T: "); scanf("%lf", &aluno.T);
-        while((getchar()) != '\n');
-        printf("PO: "); scanf("%lf", &aluno.PO);
-        while((getchar()) != '\n');
-
+        scanf(" %[^0-9] %d %lf %lf %lf %lf", aluno.nome, &aluno.RA, &aluno.P1, &aluno.P2, &aluno.T, &aluno.PO);
         fprintf(lista, "%s %d %0.1lf %0.1lf %0.1lf %0.1lf\n", aluno.nome, aluno.RA, aluno.P1, aluno.P2, aluno.T, aluno.PO);
+        while((getchar()) != '\n');
     }
 
     fclose(lista);
@@ -83,7 +72,7 @@ void cadastrarAluno()
 // 2
 void buscarAluno()
 {
-    Aluno listaAlunos[10], alunosIguais[10],atual;
+    Aluno listaAlunos[10], alunosIguais[10], atual;
     char procurado[NOME];
     printf("Procurado: "); scanf("%s", procurado);
 
@@ -94,28 +83,34 @@ void buscarAluno()
     else
     {
         int count = 0, countIguais = 0;
-        listaAlunos[count] = atual;
 
         while(feof(lista) == 0)
         {
-
-            fscanf(lista, "%s %d %lf %lf %lf %lf\n", atual.nome, &atual.RA, &atual.P1, &atual.P2, &atual.T, &atual.PO);
-            printf("%s %d %lf %lf %lf %lf\n", atual.nome, atual.RA, atual.P1, atual.P2, atual.T, atual.PO);
+            fscanf(lista, "%[^0-9] %d %lf %lf %lf %lf\n", atual.nome, &atual.RA, &atual.P1, &atual.P2, &atual.T, &atual.PO);
             listaAlunos[count] = atual;
             count++;
 
-            if(strcmp(procurado, atual.nome) == 0)
+            if(strstr(atual.nome, procurado) != NULL)
             {
                 alunosIguais[countIguais] = atual;
                 countIguais++;
-                printf("Encontrei!\n");
             }
-
         }
+        
+        Aluno inside;
+        for(int i=0; i<countIguais; i++)
+        {
+            inside = alunosIguais[i];
+            printf("%s %d %0.1lf %0.1lf %0.1lf %0.1lf ", inside.nome, inside.RA, inside.P1, inside.P2, inside.T, inside.PO);
+
+            if(aprovado(inside))
+                printf("Aprovado\n");
+            else
+                printf("Reprovado\n");
+        }
+
+        printf("Total: %d\n", countIguais);
     }
-
-
-
 
     fclose(lista);
 }

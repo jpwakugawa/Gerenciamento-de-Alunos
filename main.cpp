@@ -7,7 +7,7 @@ int main()
 {
     while(true)
     {
-        printf("--- MENU ---\n");
+        printf("\n--- MENU ---\n");
 
         int option;
         printf("1. Cadastrar novo aluno.\n");
