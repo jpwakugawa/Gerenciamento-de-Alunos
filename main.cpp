@@ -27,7 +27,16 @@ int main()
         }
         else if(option == 2)
         {
-            //buscarAluno();
+            buscarAluno();
+        }
+
+        else if(option == 3)
+        {
+            char arquivo[100];
+            printf("Nome do arquivo: ");
+            scanf("%s", arquivo);
+
+            //lerArquivo(arquivo);
         }
     }
 }

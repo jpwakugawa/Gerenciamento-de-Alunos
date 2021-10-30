@@ -83,9 +83,9 @@ void cadastrarAluno()
 // 2
 void buscarAluno()
 {
-    Aluno listaAlunos[10];
+    Aluno listaAlunos[10], alunosIguais[10],atual;
     char procurado[NOME];
-    printf("Digite o nome procurado: "); scanf("%s", procurado);
+    printf("Procurado: "); scanf("%s", procurado);
 
     lista = fopen("lista.txt", "r");
 
@@ -93,11 +93,50 @@ void buscarAluno()
         printf("Erro na abertura do arquivo");
     else
     {
-        // ...
+        int count = 0, countIguais = 0;
+        listaAlunos[count] = atual;
+
+        while(feof(lista) == 0)
+        {
+
+            fscanf(lista, "%s %d %lf %lf %lf %lf\n", atual.nome, &atual.RA, &atual.P1, &atual.P2, &atual.T, &atual.PO);
+            printf("%s %d %lf %lf %lf %lf\n", atual.nome, atual.RA, atual.P1, atual.P2, atual.T, atual.PO);
+            listaAlunos[count] = atual;
+            count++;
+
+            if(strcmp(procurado, atual.nome) == 0)
+            {
+                alunosIguais[countIguais] = atual;
+                countIguais++;
+                printf("Encontrei!\n");
+            }
+
+        }
     }
 
 
 
+
+    fclose(lista);
+}
+
+// 3
+void lerArquivo(char arquivo[NOME])
+{
+    int cont = 0;
+    Aluno aluno;
+    lista = fopen(arquivo, "r");
+
+    if(lista == NULL)
+        printf("Erro na abertura do arquivo!");
+    else
+    {
+        while(feof(lista) == 0)
+        {
+            cont++;
+            fscanf(lista, "%s %d %lf %lf %lf %lf\n", aluno.nome, &aluno.RA, &aluno.P1, &aluno.P2, &aluno.T, &aluno.PO);
+        }
+    }
 
     fclose(lista);
 }

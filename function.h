@@ -16,3 +16,5 @@ struct Aluno
 void cadastrarAluno();
 
 void buscarAluno();
+
+void lerArquivo();
