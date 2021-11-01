@@ -16,27 +16,39 @@ int main()
         printf("4. Gerar arquivo com dados dos alunos aprovados.\n");
         printf("5. Gerar arquivo com dados dos alunos reprovados.\n");
         printf("6. Fechar programa.\n");
-        printf("Option: ");
+        printf("| Option: ");
         scanf("%d", &option);
+
+        char arquivo[NOME];
+        printf("| Nome do arquivo: ");
+        scanf("%s", arquivo);
+
+        printf("-------------\n");
 
         if(option == 6)
             break;
         else if(option == 1)
         {
-            cadastrarAluno();
+            cadastrarAluno(arquivo);
         }
         else if(option == 2)
         {
-            buscarAluno();
+            buscarAluno(arquivo);
         }
 
         else if(option == 3)
         {
-            char arquivo[100];
-            printf("Nome do arquivo: ");
-            scanf("%s", arquivo);
+            lerArquivo(arquivo);
+        }
 
-            //lerArquivo(arquivo);
+        else if(option == 4)
+        {
+            gerarAprovados(arquivo);
+        }
+
+        else if(option == 5)
+        {
+            gerarReprovados(arquivo);
         }
     }
 }

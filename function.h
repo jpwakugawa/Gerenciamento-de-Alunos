@@ -13,8 +13,12 @@ struct Aluno
     double PO;
 };
 
-void cadastrarAluno();
+void cadastrarAluno(char arquivo[NOME]);
 
-void buscarAluno();
+void buscarAluno(char arquivo[NOME]);
 
-void lerArquivo();
+void lerArquivo(char arquivo[NOME]);
+
+void gerarAprovados(char arquivo[NOME]);
+
+void gerarReprovados(char arquivo[NOME]);
