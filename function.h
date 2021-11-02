@@ -13,7 +13,7 @@ struct Aluno
     double PO;
 };
 
-void cadastrarAluno(char arquivo[NOME]);
+void cadastrarAluno();
 
 void buscarAluno(char arquivo[NOME]);
 

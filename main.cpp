@@ -20,34 +20,46 @@ int main()
         scanf("%d", &option);
 
         char arquivo[NOME];
-        printf("| Nome do arquivo: ");
-        scanf("%s", arquivo);
-
-        printf("-------------\n");
 
         if(option == 6)
             break;
         else if(option == 1)
         {
-            cadastrarAluno(arquivo);
+            cadastrarAluno();
         }
         else if(option == 2)
         {
+            printf("| Nome do arquivo: ");
+            scanf("%s", arquivo);
+
+            printf("-------------\n");
             buscarAluno(arquivo);
         }
 
         else if(option == 3)
         {
+            printf("| Nome do arquivo: ");
+            scanf("%s", arquivo);
+
+            printf("-------------\n");
             lerArquivo(arquivo);
         }
 
         else if(option == 4)
         {
+            printf("| Nome do arquivo: ");
+            scanf("%s", arquivo);
+
+            printf("-------------\n");
             gerarAprovados(arquivo);
         }
 
         else if(option == 5)
         {
+            printf("| Nome do arquivo: ");
+            scanf("%s", arquivo);
+
+            printf("-------------\n");
             gerarReprovados(arquivo);
         }
     }

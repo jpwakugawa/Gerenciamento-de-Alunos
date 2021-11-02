@@ -50,13 +50,40 @@ int aprovado(Aluno aluno)
         return 0;
 }
 
+void ordenarAlunos(Aluno listaD[MAX], int n)
+{
+    int min;
+    for(int i=0; i<n; i++)
+    {
+        min = i;
+        for(int j=i+1; j<n; j++)
+        {
+            int compare = strcmp(listaD[j].nome, listaD[min].nome);
+
+            if(compare == 0)
+            {
+                if(listaD[j].RA < listaD[min].RA)
+                    min = j;
+            }
+
+            else if(compare < 0)
+                min = j;
+        }
+
+        Aluno temp;
+        temp = listaD[i];
+        listaD[i] = listaD[min];
+        listaD[min] = temp;
+    }
+}
+
 // Main functions
 
 // 1
-void cadastrarAluno(char arquivo[NOME])
+void cadastrarAluno()
 {
     Aluno aluno;
-    lista = fopen(arquivo, "a");
+    lista = fopen("atual.txt", "a");
 
     if(lista == NULL)
         printf("Erro na abertura do arquivo");
@@ -76,7 +103,6 @@ void buscarAluno(char arquivo[NOME])
     Aluno listaAlunos[10], alunosIguais[10], atual;
     char procurado[NOME];
     printf("Digite um nome: "); scanf("%s", procurado);
-
     lista = fopen(arquivo, "r");
 
     if(lista == NULL)
@@ -161,6 +187,8 @@ void gerarAprovados(char arquivo[NOME])
             }
         }
 
+        ordenarAlunos(listaAprovados, contA);
+
         FILE* aprovadotxt;
         aprovadotxt = fopen("aprovados.txt", "w");
 
@@ -203,6 +231,8 @@ void gerarReprovados(char arquivo[NOME])
             }
         }
 
+        ordenarAlunos(listaReprovados, contR);
+        
         FILE* reprovadotxt;
         reprovadotxt = fopen("reprovados.txt", "w");
 
