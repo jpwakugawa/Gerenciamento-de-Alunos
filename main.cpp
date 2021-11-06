@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "function.h"
+#define MAX 10
 
 int main()
 {
@@ -20,35 +21,31 @@ int main()
         scanf("%d", &option);
 
         char arquivo[NOME];
-        printf("| Nome do arquivo: ");
-        scanf("%s", arquivo);
-
-        printf("-------------\n");
 
         if(option == 6)
             break;
+            
         else if(option == 1)
-        {
-            cadastrarAluno(arquivo);
-        }
+            cadastrarAluno();
+
         else if(option == 2)
-        {
-            buscarAluno(arquivo);
-        }
+            buscarAluno();
 
         else if(option == 3)
         {
+            printf("| Nome do arquivo: (ATUAL = atual.txt) ");
+            scanf("%s", arquivo);
+
+            printf("-------------\n");
             lerArquivo(arquivo);
         }
 
         else if(option == 4)
-        {
-            gerarAprovados(arquivo);
-        }
+            gerarAprovados();
 
         else if(option == 5)
-        {
-            gerarReprovados(arquivo);
-        }
+            gerarReprovados();
     }
+
+    return 0;
 }

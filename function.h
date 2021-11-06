@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define NOME 50
+#define MAX 10
 
 struct Aluno
 {
@@ -13,12 +14,12 @@ struct Aluno
     double PO;
 };
 
-void cadastrarAluno(char arquivo[NOME]);
+void cadastrarAluno();
 
-void buscarAluno(char arquivo[NOME]);
+void buscarAluno();
 
 void lerArquivo(char arquivo[NOME]);
 
-void gerarAprovados(char arquivo[NOME]);
+void gerarAprovados();
 
-void gerarReprovados(char arquivo[NOME]);
+void gerarReprovados();

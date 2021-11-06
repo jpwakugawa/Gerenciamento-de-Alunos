@@ -50,13 +50,40 @@ int aprovado(Aluno aluno)
         return 0;
 }
 
+void ordenarAlunos(Aluno listaD[MAX], int n)
+{
+    int min;
+    for(int i=0; i<n; i++)
+    {
+        min = i;
+        for(int j=i+1; j<n; j++)
+        {
+            int compare = strcmp(listaD[j].nome, listaD[min].nome);
+
+            if(compare == 0)
+            {
+                if(listaD[j].RA < listaD[min].RA)
+                    min = j;
+            }
+
+            else if(compare < 0)
+                min = j;
+        }
+
+        Aluno temp;
+        temp = listaD[i];
+        listaD[i] = listaD[min];
+        listaD[min] = temp;
+    }
+}
+
 // Main functions
 
 // 1
-void cadastrarAluno(char arquivo[NOME])
+void cadastrarAluno()
 {
     Aluno aluno;
-    lista = fopen(arquivo, "a");
+    lista = fopen("atual.txt", "a");
 
     if(lista == NULL)
         printf("Erro na abertura do arquivo");
@@ -64,20 +91,18 @@ void cadastrarAluno(char arquivo[NOME])
     {
         scanf(" %[^0-9] %d %lf %lf %lf %lf", aluno.nome, &aluno.RA, &aluno.P1, &aluno.P2, &aluno.T, &aluno.PO);
         fprintf(lista, "%s %d %0.1lf %0.1lf %0.1lf %0.1lf\n", aluno.nome, aluno.RA, aluno.P1, aluno.P2, aluno.T, aluno.PO);
-        while((getchar()) != '\n');
     }
 
     fclose(lista);
 }
 
 // 2
-void buscarAluno(char arquivo[NOME])
+void buscarAluno()
 {
     Aluno listaAlunos[10], alunosIguais[10], atual;
     char procurado[NOME];
     printf("Digite um nome: "); scanf("%s", procurado);
-
-    lista = fopen(arquivo, "r");
+    lista = fopen("atual.txt", "r");
 
     if(lista == NULL)
         printf("Erro na abertura do arquivo");
@@ -140,11 +165,11 @@ void lerArquivo(char arquivo[NOME])
 }
 
 // 4
-void gerarAprovados(char arquivo[NOME])
+void gerarAprovados()
 {
     Aluno aluno, listaAprovados[MAX];
     int contA = 0;
-    lista = fopen(arquivo, "r");
+    lista = fopen("atual.txt", "r");
 
     if(lista == NULL)
         printf("Erro na abertura do arquivo!");
@@ -161,6 +186,8 @@ void gerarAprovados(char arquivo[NOME])
             }
         }
 
+        ordenarAlunos(listaAprovados, contA);
+
         FILE* aprovadotxt;
         aprovadotxt = fopen("aprovados.txt", "w");
 
@@ -176,17 +203,19 @@ void gerarAprovados(char arquivo[NOME])
             }
             fprintf(aprovadotxt, "Total: %d\n", contA);
         }
+
+        fclose(aprovadotxt);
     }
 
     fclose(lista);
 }
 
 // 5
-void gerarReprovados(char arquivo[NOME])
+void gerarReprovados()
 {
     Aluno aluno, listaReprovados[MAX];
     int contR = 0;
-    lista = fopen(arquivo, "r");
+    lista = fopen("atual.txt", "r");
 
     if(lista == NULL)
         printf("Erro na abertura do arquivo!");
@@ -203,6 +232,8 @@ void gerarReprovados(char arquivo[NOME])
             }
         }
 
+        ordenarAlunos(listaReprovados, contR);
+        
         FILE* reprovadotxt;
         reprovadotxt = fopen("reprovados.txt", "w");
 
@@ -218,8 +249,9 @@ void gerarReprovados(char arquivo[NOME])
             }
             fprintf(reprovadotxt, "Total: %d\n", contR);
         }
+
+        fclose(reprovadotxt);
     }
-    printf("Total: %d", contR);
 
     fclose(lista);
 }
